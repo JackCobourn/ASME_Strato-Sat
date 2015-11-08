@@ -1,7 +1,13 @@
+// Include the libraries to access the sensors and SD card
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_LSM303_U.h>
 #include <SD.h>
+
+/** Define variables for the included files 
+
+DO NOT EDIT
+*/
 
 #define STATUS     0x00
 #define OUT_P_MSB  0x01
@@ -55,6 +61,8 @@
 /* Assign a unique ID to this sensor at the same time */
 Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(54321);
 
+/** User specified variables */
+
 /* Declare what pin the SD card is on */
 const int chipSelect = 10;
 
@@ -81,12 +89,16 @@ void buildSensorData(){
 
 
 
+/** Change this to save to a different file*/
 void selectFile(){
   //attack plan: define varible based on current altitude, use this as file name.
   dataFile = SD.open("DATA.TXT", FILE_WRITE);
 }
 
 
+/** Write a line break to a file
+ * Use this at the end of a burst of data
+ */
 void writeNewLine(File dataFile){
   if (dataFile) {
     dataFile.println();
@@ -101,6 +113,10 @@ void writeNewLine(File dataFile){
   
 }
 
+/**
+ * Write some characters to a file
+ */
+ 
 void writeFile(char* dataString, File dataFile){
   // if the file is available, write to it:
   if (dataFile) {
@@ -190,6 +206,7 @@ char* printHeaders()
 }
 
 
+/** Anything beneath this is to access the sensors */
 
 
 //Returns the number of meters above sea level
