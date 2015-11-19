@@ -1,3 +1,5 @@
+#include <SPI.h>
+
 // Include the libraries to access the sensors and SD card
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
@@ -5,7 +7,6 @@
 #include <SD.h>
 
 /** Define variables for the included files 
-
 DO NOT EDIT
 */
 
@@ -102,7 +103,7 @@ void selectFile(){
 void writeNewLine(File dataFile){
   if (dataFile) {
     dataFile.println();
-    dataFile.close();
+    //dataFile.close();
     // print to the serial port too:
     Serial.println();
   }  
@@ -117,17 +118,17 @@ void writeNewLine(File dataFile){
  * Write some characters to a file
  */
  
-void writeFile(char* dataString, File dataFile){
+void writeFile(const char* dataString, File dataFile){
   // if the file is available, write to it:
   if (dataFile) {
     dataFile.print(dataString);
-    dataFile.close();
+    //dataFile.close();
     // print to the serial port too:
     Serial.print(dataString);
   }  
   // if the file isn't open, pop up an error:
   else {
-    Serial.print("error opening file");
+    Serial.print("error opening afile");
   }
 }
 
@@ -135,7 +136,7 @@ void writeFile(double dataString, File dataFile){
   // if the file is available, write to it:
   if (dataFile) {
     dataFile.print(dataString);
-    dataFile.close();
+    // dataFile.close();
     // print to the serial port too:
     Serial.println(dataString);
   }  
@@ -199,7 +200,7 @@ void loop(void)
   delay(500);
 }
 
-char* printHeaders()
+  const char* printHeaders()
 {
   return ("X,Y,Z,Alt");
   
